@@ -1,0 +1,4 @@
+name: DeathCommand
+main: me.score_under.bukkit.deathcommand.DeathCommandPlugin
+version: 1.0-SNAPSHOT
+author: Score_Under

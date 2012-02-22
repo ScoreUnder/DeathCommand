@@ -1,0 +1,6 @@
+A simple plugin to execute a command on player death.
+
+config.yml is auto-generated to send the player a message on death - edit the command as you like.
+Players with the deathcommand.bypass permission will not have this command executed on death.
+
+Feel free to modify/redistribute this. If you make any significant modifications, make a pull request.
