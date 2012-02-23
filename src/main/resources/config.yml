@@ -1,1 +1,2 @@
 command: "tell <player> Lol you died. Change this command in plugins/DeathCommand/config.yml"
+sendAsConsole: false

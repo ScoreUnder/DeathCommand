@@ -5,6 +5,7 @@ import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -23,8 +24,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Score_Under
  */
 public class DeathCommandPlugin extends JavaPlugin implements Listener {
-    private CommandSender mySender;
+    private DeathCommandSender mySender;
     private String command;
+    private boolean isConsole;
 
     @Override
     public void onEnable() {
@@ -32,6 +34,7 @@ public class DeathCommandPlugin extends JavaPlugin implements Listener {
         final FileConfiguration config = getConfig();
         config.options().copyDefaults(true);
         command = config.getString("command");
+        isConsole = config.getBoolean("sendAsConsole");
         saveConfig();
         getServer().getPluginManager().registerEvents(this, this);
         getLogger().info("Enabled.");
@@ -50,8 +53,10 @@ public class DeathCommandPlugin extends JavaPlugin implements Listener {
             return;
         }
         
+        final CommandSender sender = isConsole ? mySender : deadPerson;
+        
         final String personalizedCommand = command.replaceAll("<player>", deadPerson.getName());
-        getServer().dispatchCommand(mySender, personalizedCommand);
+        getServer().dispatchCommand(sender, personalizedCommand);
     }
     
     public class DeathCommandSender implements ConsoleCommandSender {
